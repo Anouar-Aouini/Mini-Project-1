@@ -1,12 +1,17 @@
   <mat-card>
   <mat-card-title>{{i}}</mat-card-title>
   <mat-card-subtitle></mat-card-subtitle>
-  <mat-card-content>
+  <mat-card-content *ngIf="!edit">
     <p>{{article.title}}</p>
     <p>{{article.content}}</p>
   </mat-card-content>
+  <mat-card-content *ngIf="edit">
+    <input placeholder="Enter new title" [value]="article.title" class="form-control" matInput type="text" #title>
+    <input placeholder="Enter new content" [value]="article.content" class="form-control"  matInput type="text" #content>
+  </mat-card-content>
   <mat-card-actions>
     <button *ngIf="article.makerId===user?.id" mat-raised-button color="warn" (click)="deleteArticle(article.id)">Delete</button>
-    <button mat-button>SHARE</button>
+    <button mat-button *ngIf="article.makerId===user?.id && !edit" (click)="showTemp()">Edit</button>
+    <button mat-button *ngIf="article.makerId===user?.id && edit" (click)="editArticle(article.id)">Save</button>
   </mat-card-actions>
 </mat-card>

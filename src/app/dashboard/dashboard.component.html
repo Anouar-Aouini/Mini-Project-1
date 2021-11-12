@@ -5,7 +5,10 @@
     </div>
 
     <div class="profile-card__cnt js-profile-cnt">
-      <div class="profile-card__name">{{user?.username}}</div>
+      <div *ngIf="edit">
+        <input type="text" [value]="user?.username" class="form-control" #username>
+      </div>
+      <div class="profile-card__name" *ngIf="!edit">{{user?.username}}</div>
       <div class="profile-card__txt"><strong>{{user?.email}}</strong></div>
       <div class="profile-card-loc">
         <span class="profile-card-loc__icon">
@@ -23,9 +26,11 @@
           <div class="profile-card-inf__title">{{myArticles?.length}}</div>
           <div class="profile-card-inf__txt">My Articles</div>
         </div>
-        
+
       </div>
       <div class="profile-card-ctr">
+        <button class="profile-card__button button--orange" *ngIf="!edit"  (click)="showTemp()">Edit Profile</button>
+        <button class="profile-card__button button--orange" *ngIf="edit"   (click)="editUser(user!.id)">Save</button>
         <button class="profile-card__button button--orange"  (click)="logOut()">Log Out</button>
       </div>
     </div>

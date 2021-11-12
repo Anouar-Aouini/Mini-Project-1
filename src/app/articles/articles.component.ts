@@ -19,11 +19,15 @@ export class ArticlesComponent implements OnInit {
     this.articles = this.articlesService.getArticles()
     this.user = this.articlesService.getLoggedUser();
   }
-    deleteArticle(id: number) {
+  deleteArticle(id: number) {
     if (this.articles) {
       this.articles = this.articlesService.getArticles().filter(el => el.id !== id)
       this.articlesService.setArticles(JSON.stringify(this.articles))
     }
+    }
+  editArticle(newArticle:{id:number,title:string,content:string}) {
+    this.articlesService.setArticles(JSON.stringify(this.articles.map(el => el.id === newArticle.id ?
+      { ...el, title: newArticle.title, content: newArticle.content } : el)))
+    this.articles = this.articlesService.getArticles();
   }
-
 }

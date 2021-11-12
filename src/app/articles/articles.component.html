@@ -1,11 +1,11 @@
-  <h2 *ngIf="articles===null">There is no articles yet!</h2>
-  <div class="container" *ngIf="articles">
+  <h2 *ngIf=" articles===null || !articles.length ">There is no articles yet!</h2>
+  <div class="container" *ngIf="articles.length">
   <input type="text" placeholder="Type a title" class="form-control" [(ngModel)]="searchedArticle">
 <div class="row">
     <app-article  class="example-card" [article]=article [i]=i+1
     (deleteEvent)="deleteArticle($event)"
+    (editEvent)="editArticle($event)"
         *ngFor="let i=index ;let article of articles| search:searchedArticle:'title'">
     </app-article>
   </div>
-
 </div>

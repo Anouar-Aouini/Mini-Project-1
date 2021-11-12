@@ -8,10 +8,16 @@ export class ArticlesService {
 
   constructor() { }
   public articles: Article[] = []
+
   setArticles(articles:string) {
     localStorage.setItem("articles",articles)
   }
-
+    setUsers(users:string) {
+      localStorage.setItem("users", users)
+    }
+      setUser(user:string) {
+      localStorage.setItem("user", user)
+    }
 
   getArticles() {
     let local: string = <string>localStorage.getItem("articles");
@@ -19,7 +25,7 @@ export class ArticlesService {
     return this.articles
   }
   getLoggedUser() {
-        let local:string = <string>localStorage.getItem('user')
+    let local:string = <string>localStorage.getItem('user')
     let user = JSON.parse(local)
     return user;
   }
@@ -28,6 +34,11 @@ export class ArticlesService {
     let local:string = <string>localStorage.getItem('user')
     let user = JSON.parse(local)
     return !!user;
+  }
+
+  getUsers() {
+    let local: string = <string>localStorage.getItem("users");
+    return  JSON.parse(local);
   }
 
 }

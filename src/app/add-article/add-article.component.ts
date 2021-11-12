@@ -16,7 +16,6 @@ export class AddArticleComponent implements OnInit {
   addArticle(articleForm:NgForm) {
 
     let local: string = <string>localStorage.getItem("articles");
-
     let user:string = <string>localStorage.getItem("user")
     let user1 = JSON.parse(user);
      let article={id: Math.random(),
@@ -29,5 +28,6 @@ export class AddArticleComponent implements OnInit {
     } else {
       localStorage.setItem("articles", JSON.stringify([article]))
     }
+    articleForm.resetForm()
   }
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticlesService } from '../articles.service';
 import { User } from './user.model';
 
 @Component({
@@ -8,11 +9,10 @@ import { User } from './user.model';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  constructor(public articlesService:ArticlesService) { }
 public users:User[]=[]
   ngOnInit(): void {
-    let local: string = <string>localStorage.getItem("users");
-    this.users = JSON.parse(local)
+    this.users = this.articlesService.getUsers();
   }
 
 }

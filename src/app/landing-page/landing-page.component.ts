@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ArticlesService } from './../articles.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,public router:Router) { }
+  constructor(private fb: FormBuilder,public router:Router,public articlesService: ArticlesService) { }
   public loginForm!: FormGroup;
   public registerForm!: FormGroup;
   public errorMessage = {msg:"",show:false};
@@ -111,7 +112,6 @@ export class LandingPageComponent implements OnInit {
          username: this.registerForm.value.username ,
          password: this.registerForm.value.passOne
      }
-    console.log(JSON.parse(local))
 
     if (local && [...JSON.parse(local)].filter(el => el.email === this.registerForm.value.email).length === 1) {
       this.errorMessage.msg = "This email is already used"
@@ -124,11 +124,11 @@ export class LandingPageComponent implements OnInit {
     else if (local) {
       let users = [user, ...JSON.parse(local)];
       localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('user', JSON.stringify(user));
+      this.articlesService.setUser(JSON.stringify(user));
       this.router.navigate(["/articles"])
     } else {
       localStorage.setItem("users", JSON.stringify([user]))
-      localStorage.setItem('user', JSON.stringify(user));
+      this.articlesService.setUser(JSON.stringify(user));
       this.router.navigate(["/articles"])
     }
 
