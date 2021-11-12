@@ -1,0 +1,10 @@
+.example-card {
+  width: 330px;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}

@@ -1,0 +1,41 @@
+<div class="container">
+<h1 style="text-align: center;">Add Article</h1>
+<mat-card>
+  <form (submit)="addArticle(articleForm)" #articleForm="ngForm">
+  <mat-form-field>
+         <textarea matInput
+           name="title"
+           ngModel
+           required
+           minlength="3"
+           placeholder="Enter title"
+           #title="ngModel"
+         ></textarea>
+         <mat-error *ngIf="title.invalid && title.touched">
+           <mat-error *ngIf="title.errors?.required">Title is required</mat-error>
+           <mat-error *ngIf="title.errors?.minlength">Title must contain 3 characters at least</mat-error>
+         </mat-error>
+
+</mat-form-field>
+  <mat-form-field>
+         <textarea matInput
+          name="content"
+          ngModel
+          required
+          minlength="6"
+          placeholder="Enter content"
+          #content="ngModel"
+         ></textarea>
+          <mat-error *ngIf="content.invalid && content.touched">
+           <mat-error *ngIf="content.errors?.required">Content is required</mat-error>
+           <mat-error *ngIf="content.errors?.minlength">Content must contain 6 characters at least</mat-error>
+         </mat-error></mat-form-field>
+<button
+mat-raised-button
+color="accent"
+type="submit"
+[disabled]="articleForm.invalid"
+>Save</button>
+</form>
+</mat-card>
+</div>
