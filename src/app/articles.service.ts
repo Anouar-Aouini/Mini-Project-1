@@ -9,36 +9,39 @@ export class ArticlesService {
   constructor() { }
   public articles: Article[] = []
 
-  setArticles(articles:string) {
-    localStorage.setItem("articles",articles)
-  }
-    setUsers(users:string) {
-      localStorage.setItem("users", users)
-    }
-      setUser(user:string) {
-      localStorage.setItem("user", user)
-    }
-
-  getArticles() {
+    getArticles() {
     let local: string = <string>localStorage.getItem("articles");
     this.articles = JSON.parse(local)
     return this.articles
-  }
-  getLoggedUser() {
+    }
+
+    setArticles(articles:string) {
+    localStorage.setItem("articles",articles)
+    }
+
+    getUsers() {
+    let local: string = <string>localStorage.getItem("users");
+    return  JSON.parse(local);
+    }
+
+    setUsers(users:string) {
+    localStorage.setItem("users", users)
+    }
+
+    setUser(user:string) {
+    localStorage.setItem("user", user)
+    }
+
+    getLoggedUser() {
     let local:string = <string>localStorage.getItem('user')
     let user = JSON.parse(local)
     return user;
-  }
+    }
 
-  getUser() {
+    getUser() {
     let local:string = <string>localStorage.getItem('user')
     let user = JSON.parse(local)
     return !!user;
-  }
-
-  getUsers() {
-    let local: string = <string>localStorage.getItem("users");
-    return  JSON.parse(local);
-  }
+    }
 
 }
