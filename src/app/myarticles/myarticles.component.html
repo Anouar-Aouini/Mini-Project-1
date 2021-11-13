@@ -6,7 +6,13 @@
     (deleteEvent)="deleteArticle($event)"
     (editEvent)="editArticle($event)"
      [article]=article [i]=i+1
-        *ngFor="let i=index ;let article of articles| search:searchedArticle:'title'">
+        *ngFor="let i=index ;let article of pageSlice| search:searchedArticle:'title'">
     </app-article>
   </div>
+    <mat-paginator [length]="articles.length"
+                 [pageSize]="6"
+                 [pageSizeOptions]="[6, 10, 10, 20]"
+                 aria-label="Select page"
+                 (page)="onChangePage($event)">
+    </mat-paginator>
 </div>

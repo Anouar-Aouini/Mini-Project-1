@@ -5,7 +5,13 @@
     <app-article  class="example-card" [article]=article [i]=i+1
     (deleteEvent)="deleteArticle($event)"
     (editEvent)="editArticle($event)"
-        *ngFor="let i=index ;let article of articles| search:searchedArticle:'title'">
+        *ngFor="let i=index ;let article of pageSlice| search:searchedArticle:'title'">
     </app-article>
   </div>
+  <mat-paginator [length]="articles.length"
+                 [pageSize]="6"
+                 [pageSizeOptions]="[6, 10, 25, 100]"
+                 aria-label="Select page"
+                 (page)="onChangePage($event)">
+</mat-paginator>
 </div>
