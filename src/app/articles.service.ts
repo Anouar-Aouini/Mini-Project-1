@@ -9,6 +9,10 @@ export class ArticlesService {
   constructor() { }
   public articles: Article[] = []
 
+  getLocal(item:string) {
+      return  <string>localStorage.getItem(item)
+    }
+
     getArticles() {
     let local: string = <string>localStorage.getItem("articles");
     this.articles = JSON.parse(local)

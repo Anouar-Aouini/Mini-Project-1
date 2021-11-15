@@ -11,7 +11,7 @@ export class SearchPipe implements PipeTransform {
     }
     const resultArray=[]
     for (let item of value) {
-      if (item[propName].includes(searchedString.trim()) ) {
+      if (item[propName].toLowerCase().includes(searchedString.toLowerCase().trim()) ) {
            resultArray.push(item)
          }
      }

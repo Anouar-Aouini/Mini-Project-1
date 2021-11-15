@@ -90,14 +90,14 @@
                                ">Passwords match</h3>
                               </div>
                               </div>
-                            <div class="group">
-                               <label for="pass" class="label">Email Address</label>
-                              <input
-                              formControlName="email"
-                                 type="text"
-                                 class="form-control"
-                                 placeholder="Enter your email address">
-                                 <div *ngIf="registerEmail?.errors && (registerEmail?.invalid || registerEmail?.touched)">
+                               <div class="group">
+                                  <label for="pass" class="label">Email Address</label>
+                                  <input
+                                  formControlName="email"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Enter your email address">
+                                   <div *ngIf="registerEmail?.errors && (registerEmail?.invalid || registerEmail?.touched)">
                                        <h3 class="text-danger" *ngIf="registerEmail?.errors?.required && registerEmail?.touched">Email is required</h3>
                                        <h3 class="text-danger" *ngIf="registerEmail?.errors?.email && registerEmail?.touched">Invalid email</h3>
                                   </div>

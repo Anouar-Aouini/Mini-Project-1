@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ArticlesService } from './../articles.service';
 
 @Component({
   selector: 'app-add-article',
@@ -8,15 +9,15 @@ import { NgForm } from '@angular/forms';
 })
 export class AddArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor(public articlesService:ArticlesService) { }
 
   ngOnInit(): void {
   }
 
   addArticle(articleForm:NgForm) {
 
-    let local: string = <string>localStorage.getItem("articles");
-    let user:string = <string>localStorage.getItem("user")
+    let local: string = this.articlesService.getLocal("articles");
+    let user:string = this.articlesService.getLocal("user")
     let user1 = JSON.parse(user);
      let article={id: Math.random(),
          title: articleForm.value.title,
@@ -24,9 +25,9 @@ export class AddArticleComponent implements OnInit {
          makerId: user1.id }
     if (local) {
       let articles = [article, ...JSON.parse(local)];
-      localStorage.setItem('articles', JSON.stringify(articles));
+      this.articlesService.setArticles(JSON.stringify(articles))
     } else {
-      localStorage.setItem("articles", JSON.stringify([article]))
+      this.articlesService.setArticles(JSON.stringify([article]))
     }
     articleForm.resetForm()
   }

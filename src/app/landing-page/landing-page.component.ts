@@ -70,7 +70,7 @@ export class LandingPageComponent implements OnInit {
     }
 
   onSubmitLogin() {
-    let local: string = <string>localStorage.getItem("users");
+    let local: string = this.articlesService.getLocal("users");
     if (local) {
       let users = [...JSON.parse(local)];
     if (!users || !users.filter(el => el.email === this.loginForm.value.email).length) {
@@ -82,10 +82,9 @@ export class LandingPageComponent implements OnInit {
     } else {
       for (let i of users) {
         if (i.email === this.loginForm.value.email && i.password === this.loginForm.value.password) {
-          localStorage.setItem('user', JSON.stringify(i));
+          this.articlesService.setUser(JSON.stringify(i))
           this.router.navigate(["/articles"])
         } else {
-
           this.errorMessage.msg = "check your password"
           this.errorMessage.show = true;
           setTimeout(() => {
@@ -106,7 +105,7 @@ export class LandingPageComponent implements OnInit {
 
 
   onSubmitRegister() {
-     let local: string = <string>localStorage.getItem("users");
+     let local: string = this.articlesService.getLocal("users");
      let user={id: Math.random(),
          email: this.registerForm.value.email,
          username: this.registerForm.value.username ,
@@ -123,11 +122,11 @@ export class LandingPageComponent implements OnInit {
     }
     else if (local) {
       let users = [user, ...JSON.parse(local)];
-      localStorage.setItem('users', JSON.stringify(users));
+      this.articlesService.setUsers(JSON.stringify(users));
       this.articlesService.setUser(JSON.stringify(user));
       this.router.navigate(["/articles"])
     } else {
-      localStorage.setItem("users", JSON.stringify([user]))
+      this.articlesService.setUsers(JSON.stringify([user]))
       this.articlesService.setUser(JSON.stringify(user));
       this.router.navigate(["/articles"])
     }
