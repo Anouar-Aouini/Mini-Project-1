@@ -14,12 +14,11 @@ export class AddArticleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addArticle(articleForm:NgForm) {
-
+  addArticle(articleForm:NgForm){
     let local: string = this.articlesService.getLocal("articles");
-    let user:string = this.articlesService.getLocal("user")
+    let user: string = this.articlesService.getLocal("user")
     let user1 = JSON.parse(user);
-     let article={id: Math.random(),
+    let article={id: Math.random(),
          title: articleForm.value.title,
          content: articleForm.value.content ,
          makerId: user1.id }
